@@ -8,6 +8,29 @@ class HomeBMI extends StatefulWidget {
 }
 
 class HomeState extends State<HomeBMI> {
+  final TextEditingController _ageController = TextEditingController();
+  final TextEditingController _heightController = TextEditingController();
+  final TextEditingController _weightController = TextEditingController();
+
+  double inches = 0.0;
+  double result = 0.0;
+
+  void _calculateBMI() {
+    setState(() {
+      int age = int.parse(_ageController.text);
+      double height = double.parse(_heightController.text);
+      int weight = int.parse(_weightController.text);
+
+      inches = height * 12;
+
+      if ((_ageController.text.isNotEmpty || age > 0) &&
+          (_heightController.text.isNotEmpty || inches > 0) &&
+          (_weightController.text.isEmpty || weight > 0)) {
+        result = weight / (inches * inches) * 703;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -30,7 +53,7 @@ class HomeState extends State<HomeBMI> {
                 child: Column(
                   children: <Widget>[
                     TextField(
-                      controller: null,
+                      controller: _ageController,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                           labelText: "Age",
@@ -38,7 +61,7 @@ class HomeState extends State<HomeBMI> {
                           icon: Icon(Icons.person)),
                     ),
                     TextField(
-                      controller: null,
+                      controller: _heightController,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                           labelText: "Height in feet",
@@ -46,7 +69,7 @@ class HomeState extends State<HomeBMI> {
                           icon: Icon(Icons.insert_chart)),
                     ),
                     TextField(
-                      controller: null,
+                      controller: _weightController,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                           labelText: "Weight in lbs",
