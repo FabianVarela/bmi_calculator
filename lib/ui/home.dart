@@ -15,6 +15,9 @@ class HomeState extends State<HomeBMI> {
   double inches = 0.0;
   double result = 0.0;
 
+  String _resultReading = "";
+  String _finalResult = "";
+
   void _calculateBMI() {
     setState(() {
       int age = int.parse(_ageController.text);
@@ -27,8 +30,24 @@ class HomeState extends State<HomeBMI> {
           (_heightController.text.isNotEmpty || inches > 0) &&
           (_weightController.text.isEmpty || weight > 0)) {
         result = weight / (inches * inches) * 703;
+
+        double weightFixed = double.parse(result.toStringAsFixed(1));
+
+        if (weightFixed < 18.5) {
+          _resultReading = "Underweight";
+        } else if (weightFixed >= 18.5 && weightFixed < 25) {
+          _resultReading = "Great Shape!!";
+        } else if (weightFixed >= 25 && weightFixed < 30) {
+          _resultReading = "Overweight";
+        } else if (weightFixed >= 30) {
+          _resultReading = "Obese";
+        }
+      } else {
+        result = 0.0;
       }
     });
+
+    _finalResult = "Your BMI ${result.toStringAsFixed(1)}";
   }
 
   @override
@@ -80,7 +99,7 @@ class HomeState extends State<HomeBMI> {
                     Container(
                         alignment: Alignment.center,
                         child: RaisedButton(
-                          onPressed: () {},
+                          onPressed: _calculateBMI,
                           color: Colors.greenAccent,
                           child: Text("Calculate"),
                           textColor: Colors.white,
@@ -93,7 +112,7 @@ class HomeState extends State<HomeBMI> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    "BMI",
+                    "$_finalResult",
                     style: TextStyle(
                         color: Colors.blueAccent,
                         fontWeight: FontWeight.w500,
@@ -102,7 +121,7 @@ class HomeState extends State<HomeBMI> {
                   ),
                   Padding(padding: EdgeInsets.all(5)),
                   Text(
-                    "Overweight",
+                    "$_resultReading",
                     style: TextStyle(
                         color: Colors.redAccent,
                         fontWeight: FontWeight.w500,
