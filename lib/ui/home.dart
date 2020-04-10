@@ -1,137 +1,148 @@
+import 'package:bmi_calculator/ui/common/custom_card.dart';
+import 'package:bmi_calculator/ui/common/header_clip_path.dart';
+import 'package:bmi_calculator/ui/common/profile_icon_animation.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomeBMI extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() {
-    return HomeState();
-  }
+  State<StatefulWidget> createState() => HomeState();
 }
 
-class HomeState extends State<HomeBMI> {
-  final TextEditingController _ageController = TextEditingController();
-  final TextEditingController _heightController = TextEditingController();
-  final TextEditingController _weightController = TextEditingController();
-
-  double inches = 0.0;
-  double result = 0.0;
-
-  String _resultReading = "";
-  String _finalResult = "";
-
-  void _calculateBMI() {
-    setState(() {
-      int age = int.parse(_ageController.text);
-      double height = double.parse(_heightController.text);
-      int weight = int.parse(_weightController.text);
-
-      inches = height * 12;
-
-      if ((_ageController.text.isNotEmpty || age > 0) &&
-          (_heightController.text.isNotEmpty || inches > 0) &&
-          (_weightController.text.isEmpty || weight > 0)) {
-        result = weight / (inches * inches) * 703;
-
-        double weightFixed = double.parse(result.toStringAsFixed(1));
-
-        if (weightFixed < 18.5) {
-          _resultReading = "Underweight";
-        } else if (weightFixed >= 18.5 && weightFixed < 25) {
-          _resultReading = "Great Shape!!";
-        } else if (weightFixed >= 25 && weightFixed < 30) {
-          _resultReading = "Overweight";
-        } else if (weightFixed >= 30) {
-          _resultReading = "Obese";
-        }
-      } else {
-        result = 0.0;
-      }
-    });
-
-    _finalResult = "Your BMI ${result.toStringAsFixed(1)}";
-  }
-
+class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: AppBar(
-          title: Text("BMI"),
-          centerTitle: true,
-          backgroundColor: Colors.greenAccent),
-      body: Container(
-          alignment: Alignment.topCenter,
-          child: ListView(
-            padding: EdgeInsets.all(16),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Stack(
+        children: <Widget>[
+          ClipPath(
+            clipper: HeaderClipPath(),
+            child: Container(
+              color: Colors.blueAccent,
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.fromLTRB(20, 0, 20, 25),
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                _setHeader(),
+                _setBody(),
+                _setButton(),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _setHeader() {
+    return Padding(
+      padding: EdgeInsets.only(top: 50, bottom: 20),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        elevation: 10,
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(8, 8, 0, 8),
+          child: Row(
             children: <Widget>[
-              Image.asset("images/bmilogo.png", height: 85, width: 75),
-              Padding(padding: EdgeInsets.all(10)),
-              Container(
-                margin: EdgeInsets.all(3),
-                height: 290,
-                width: 290,
-                color: Colors.grey.shade300,
-                child: Column(
-                  children: <Widget>[
-                    TextField(
-                      controller: _ageController,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                          labelText: "Age",
-                          hintText: "e.g: 34",
-                          icon: Icon(Icons.person)),
-                    ),
-                    TextField(
-                      controller: _heightController,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                          labelText: "Height in feet",
-                          hintText: "e.g: 6.5",
-                          icon: Icon(Icons.insert_chart)),
-                    ),
-                    TextField(
-                      controller: _weightController,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                          labelText: "Weight in lbs",
-                          hintText: "e.g: 180",
-                          icon: Icon(Icons.line_weight)),
-                    ),
-                    Padding(padding: EdgeInsets.all(11)),
-                    Container(
-                        alignment: Alignment.center,
-                        child: RaisedButton(
-                          onPressed: _calculateBMI,
-                          color: Colors.greenAccent,
-                          child: Text("Calculate"),
-                          textColor: Colors.white,
-                        ))
-                  ],
+              Expanded(
+                child: Text(
+                  'BMI Calculator',
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
-              Padding(padding: EdgeInsets.all(10)),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    "$_finalResult",
-                    style: TextStyle(
-                        color: Colors.blueAccent,
-                        fontWeight: FontWeight.w500,
-                        fontStyle: FontStyle.italic,
-                        fontSize: 20),
-                  ),
-                  Padding(padding: EdgeInsets.all(5)),
-                  Text(
-                    "$_resultReading",
-                    style: TextStyle(
-                        color: Colors.redAccent,
-                        fontWeight: FontWeight.w500,
-                        fontStyle: FontStyle.italic,
-                        fontSize: 20),
-                  )
-                ],
-              )
+              ProfileIconAnimation(durationSeconds: 1),
             ],
-          )),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _setBody() {
+    return Expanded(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Expanded(child: _setGenderSection()),
+                Expanded(child: _setAgeSection()),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Expanded(child: _setHeightSection()),
+                Expanded(child: _setWeightSection()),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _setGenderSection() {
+    return CustomCard(
+      title: 'Gender',
+      child: Container(),
+    );
+  }
+
+  Widget _setAgeSection() {
+    return CustomCard(
+      title: 'Age',
+      child: Container(),
+    );
+  }
+
+  Widget _setHeightSection() {
+    return CustomCard(
+      title: 'Height',
+      child: Container(),
+    );
+  }
+
+  Widget _setWeightSection() {
+    return CustomCard(
+      title: 'Weight',
+      child: Container(),
+    );
+  }
+
+  Widget _setButton() {
+    return Padding(
+      padding: EdgeInsets.only(top: 10),
+      child: RaisedButton(
+        onPressed: () {},
+        color: Colors.indigo,
+        padding: EdgeInsets.symmetric(vertical: 15),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: Text(
+          'Calculate',
+          style: TextStyle(
+              fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white),
+        ),
+      ),
     );
   }
 }
