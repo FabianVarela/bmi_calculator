@@ -1,3 +1,5 @@
+import 'package:bmi_calculator/model/gender.dart';
+import 'package:bmi_calculator/ui/cards/age_card_section.dart';
 import 'package:bmi_calculator/ui/cards/gender_card_section.dart';
 import 'package:bmi_calculator/ui/common/custom_card.dart';
 import 'package:bmi_calculator/ui/common/header_clip_path.dart';
@@ -11,6 +13,8 @@ class HomeBMI extends StatefulWidget {
 }
 
 class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
+  Gender _currentGender;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,13 +86,17 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
                 Expanded(
                   child: CustomCard(
                     title: 'Gender',
-                    child: GenderCardSection(),
+                    child: GenderCardSection(
+                      onChangeGender: (Gender gender) {
+                        setState(() => _currentGender = gender);
+                      },
+                    ),
                   ),
                 ),
                 Expanded(
                   child: CustomCard(
                     title: 'Age',
-                    child: Container(),
+                    child: AgeCardSection(gender: _currentGender),
                   ),
                 ),
               ],
