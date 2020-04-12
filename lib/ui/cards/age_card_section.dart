@@ -3,9 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AgeCardSection extends StatefulWidget {
-  AgeCardSection({@required this.gender});
+  AgeCardSection({@required this.gender, @required this.onChangeAge});
 
   final Gender gender;
+  final Function(int age) onChangeAge;
 
   @override
   _AgeCardSectionState createState() => _AgeCardSectionState();
@@ -137,7 +138,7 @@ class _AgeCardSectionState extends State<AgeCardSection>
                   Padding(
                     padding: EdgeInsets.only(top: 5),
                     child: Text(
-                      '$_age',
+                      '$_age years',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w300,
