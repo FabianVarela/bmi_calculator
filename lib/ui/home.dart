@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/ui/cards/gender_card_section.dart';
 import 'package:bmi_calculator/ui/common/custom_card.dart';
 import 'package:bmi_calculator/ui/common/header_clip_path.dart';
 import 'package:bmi_calculator/ui/common/profile_icon_animation.dart';
@@ -46,9 +47,7 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
     return Padding(
       padding: EdgeInsets.only(top: 50, bottom: 20),
       child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         elevation: 10,
         child: Padding(
           padding: EdgeInsets.fromLTRB(8, 8, 0, 8),
@@ -80,8 +79,18 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Expanded(child: _setGenderSection()),
-                Expanded(child: _setAgeSection()),
+                Expanded(
+                  child: CustomCard(
+                    title: 'Gender',
+                    child: GenderCardSection(),
+                  ),
+                ),
+                Expanded(
+                  child: CustomCard(
+                    title: 'Age',
+                    child: Container(),
+                  ),
+                ),
               ],
             ),
           ),
@@ -96,20 +105,6 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
           ),
         ],
       ),
-    );
-  }
-
-  Widget _setGenderSection() {
-    return CustomCard(
-      title: 'Gender',
-      child: Container(),
-    );
-  }
-
-  Widget _setAgeSection() {
-    return CustomCard(
-      title: 'Age',
-      child: Container(),
     );
   }
 
@@ -140,7 +135,10 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
         child: Text(
           'Calculate',
           style: TextStyle(
-              fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white),
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+            color: Colors.white,
+          ),
         ),
       ),
     );
