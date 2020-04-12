@@ -17,12 +17,16 @@ class CustomCard extends StatelessWidget {
         width: double.infinity,
         padding: EdgeInsets.all(10),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w400,
+            Align(
+              alignment: Alignment.topCenter,
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             ),
             Padding(

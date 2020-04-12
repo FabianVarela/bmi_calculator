@@ -24,7 +24,7 @@ class _ProfileIconAnimationState extends State<ProfileIconAnimation>
       duration: Duration(seconds: widget.durationSeconds),
     );
 
-    _shakeAnimation = Tween<double>(begin: 0.0, end: 24.0)
+    _shakeAnimation = Tween<double>(begin: 0.0, end: 16.0)
         .chain(CurveTween(curve: Curves.elasticIn))
         .animate(_animationController)
           ..addStatusListener((AnimationStatus status) {
