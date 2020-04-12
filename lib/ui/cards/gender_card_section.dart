@@ -14,6 +14,10 @@ const Map<String, double> _genderAngles = <String, double>{
 };
 
 class GenderCardSection extends StatefulWidget {
+  GenderCardSection({@required this.onChangeGender});
+
+  final Function(Gender gender) onChangeGender;
+
   @override
   _GenderCardSectionState createState() => _GenderCardSectionState();
 }
@@ -78,14 +82,22 @@ class _GenderCardSectionState extends State<GenderCardSection>
                 GenderIcon(gender: _genderList[1]),
                 GenderIcon(gender: _genderList[2]),
                 Positioned.fill(
-                  child: GenderSelector(
-                    onGenderSelected: (String gender) {
-                      setState(() => _currentGender = gender);
-                      _controller.animateTo(
-                        _genderAngles[gender],
-                        duration: Duration(milliseconds: 150),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: List<Widget>.generate(3, (int index) {
+                      return GenderSelector(
+                        gender: _genderList[index],
+                        onGenderSelected: (Gender gender) {
+                          setState(() => _currentGender = gender.name);
+                          widget.onChangeGender(gender);
+
+                          _controller.animateTo(
+                            _genderAngles[gender.name],
+                            duration: Duration(milliseconds: 150),
+                          );
+                        },
                       );
-                    },
+                    }),
                   ),
                 ),
               ],
@@ -188,25 +200,17 @@ class ArrowSelector extends AnimatedWidget {
 }
 
 class GenderSelector extends StatelessWidget {
-  GenderSelector({this.onGenderSelected});
+  GenderSelector({@required this.gender, this.onGenderSelected});
 
-  final Function(String) onGenderSelected;
+  final Gender gender;
+  final Function(Gender) onGenderSelected;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      children: <Widget>[
-        Expanded(
-          child: GestureDetector(onTap: () => onGenderSelected('Female')),
-        ),
-        Expanded(
-          child: GestureDetector(onTap: () => onGenderSelected('Other')),
-        ),
-        Expanded(
-          child: GestureDetector(onTap: () => onGenderSelected('Male')),
-        ),
-      ],
+    return Expanded(
+      child: GestureDetector(
+        onTap: () => onGenderSelected(gender),
+      ),
     );
   }
 }
