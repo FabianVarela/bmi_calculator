@@ -57,53 +57,49 @@ class _GenderCardSectionState extends State<GenderCardSection>
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      child: Column(
-        children: <Widget>[
-          Container(
-            width: double.infinity,
-            child: Stack(
-              alignment: Alignment.bottomCenter,
+      child: Container(
+        width: double.infinity,
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: <Widget>[
+            Stack(
+              alignment: Alignment.center,
               children: <Widget>[
-                Stack(
-                  alignment: Alignment.center,
-                  children: <Widget>[
-                    Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.grey.withOpacity(.6),
-                      ),
-                    ),
-                    ArrowSelector(listenable: _controller),
-                  ],
-                ),
-                GenderIcon(gender: _genderList[0]),
-                GenderIcon(gender: _genderList[1]),
-                GenderIcon(gender: _genderList[2]),
-                Positioned.fill(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: List<Widget>.generate(3, (int index) {
-                      return GenderSelector(
-                        gender: _genderList[index],
-                        onGenderSelected: (Gender gender) {
-                          setState(() => _currentGender = gender.name);
-                          widget.onChangeGender(gender);
-
-                          _controller.animateTo(
-                            _genderAngles[gender.name],
-                            duration: Duration(milliseconds: 150),
-                          );
-                        },
-                      );
-                    }),
+                Container(
+                  width: 100,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.grey.withOpacity(.6),
                   ),
                 ),
+                ArrowSelector(listenable: _controller),
               ],
             ),
-          ),
-        ],
+            GenderIcon(gender: _genderList[0]),
+            GenderIcon(gender: _genderList[1]),
+            GenderIcon(gender: _genderList[2]),
+            Positioned.fill(
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                children: List<Widget>.generate(3, (int index) {
+                  return GenderSelector(
+                    gender: _genderList[index],
+                    onGenderSelected: (Gender gender) {
+                      setState(() => _currentGender = gender.name);
+                      widget.onChangeGender(gender);
+
+                      _controller.animateTo(
+                        _genderAngles[gender.name],
+                        duration: Duration(milliseconds: 150),
+                      );
+                    },
+                  );
+                }),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

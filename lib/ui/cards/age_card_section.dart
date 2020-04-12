@@ -73,58 +73,54 @@ class _AgeCardSectionState extends State<AgeCardSection>
               ),
             ),
           ),
-        Column(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Icon(
-                  Icons.arrow_right,
-                  size: 45,
-                  color: Colors.indigo,
-                ),
-                Expanded(
-                  child: Container(
-                    height: 180,
-                    child: ListWheelScrollView(
-                      controller: _controller,
-                      itemExtent: 40,
-                      magnification: 1.5,
-                      useMagnifier: true,
-                      physics: FixedExtentScrollPhysics(),
-                      offAxisFraction: -0.4,
-                      children: List<Widget>.generate(91, (int index) {
-                        return Container(
-                          padding: EdgeInsets.all(3),
-                          decoration: index == _age
-                              ? BoxDecoration(
-                                  color: Colors.blueAccent,
-                                  shape: BoxShape.circle,
-                                )
-                              : null,
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                              '$index',
-                              style: TextStyle(
-                                fontSize: 15,
-                                color: index == _age ? Colors.white : null,
-                                fontWeight: index == _age
-                                    ? FontWeight.w300
-                                    : FontWeight.w600,
-                              ),
-                            ),
+            Icon(
+              Icons.arrow_right,
+              size: 45,
+              color: Colors.indigo,
+            ),
+            Expanded(
+              child: Container(
+                height: 161,
+                child: ListWheelScrollView(
+                  controller: _controller,
+                  itemExtent: 40,
+                  magnification: 1.5,
+                  useMagnifier: true,
+                  physics: FixedExtentScrollPhysics(),
+                  offAxisFraction: -0.4,
+                  children: List<Widget>.generate(91, (int index) {
+                    return Container(
+                      padding: EdgeInsets.all(3),
+                      decoration: index == _age
+                          ? BoxDecoration(
+                              color: Colors.blueAccent,
+                              shape: BoxShape.circle,
+                            )
+                          : null,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          '$index',
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: index == _age ? Colors.white : null,
+                            fontWeight: index == _age
+                                ? FontWeight.w300
+                                : FontWeight.w600,
                           ),
-                        );
-                      }),
-                      onSelectedItemChanged: (int value) {
-                        setState(() => _age = value);
-                        widget.onChangeAge(value);
-                      },
-                    ),
-                  ),
+                        ),
+                      ),
+                    );
+                  }),
+                  onSelectedItemChanged: (int value) {
+                    setState(() => _age = value);
+                    widget.onChangeAge(value);
+                  },
                 ),
-              ],
+              ),
             ),
           ],
         ),

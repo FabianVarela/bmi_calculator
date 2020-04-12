@@ -49,25 +49,18 @@ class _HeightCardSectionState extends State<HeightCardSection> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Expanded(
-          flex: 2,
-          child: GestureDetector(
-            behavior: HitTestBehavior.translucent,
-            onTapDown: _onTapHeight,
-            onVerticalDragStart: _onDragStartHeight,
-            onVerticalDragUpdate: _onDragUpdateHeight,
-            child: Stack(
-              children: <Widget>[
-                _setPerson(),
-                _setSlider(),
-                _setLabels(),
-              ],
-            ),
-          ),
-        ),
-      ],
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTapDown: _onTapHeight,
+      onVerticalDragStart: _onDragStartHeight,
+      onVerticalDragUpdate: _onDragUpdateHeight,
+      child: Stack(
+        children: <Widget>[
+          _setPerson(),
+          _setSlider(),
+          _setLabels(),
+        ],
+      ),
     );
   }
 
