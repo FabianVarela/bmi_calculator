@@ -1,6 +1,7 @@
 import 'package:bmi_calculator/model/gender.dart';
 import 'package:bmi_calculator/ui/cards/age_card_section.dart';
 import 'package:bmi_calculator/ui/cards/gender_card_section.dart';
+import 'package:bmi_calculator/ui/cards/height_card_section.dart';
 import 'package:bmi_calculator/ui/common/custom_card.dart';
 import 'package:bmi_calculator/ui/common/header_clip_path.dart';
 import 'package:bmi_calculator/ui/common/profile_icon_animation.dart';
@@ -14,6 +15,7 @@ class HomeBMI extends StatefulWidget {
 
 class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
   Gender _currentGender;
+  int _currentAge;
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +98,12 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
                 Expanded(
                   child: CustomCard(
                     title: 'Age',
-                    child: AgeCardSection(gender: _currentGender),
+                    child: AgeCardSection(
+                      gender: _currentGender,
+                      onChangeAge: (int age) {
+                        setState(() => _currentAge = age);
+                      },
+                    ),
                   ),
                 ),
               ],
@@ -106,20 +113,28 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Expanded(child: _setHeightSection()),
-                Expanded(child: _setWeightSection()),
+                Expanded(
+                  flex: 2,
+                  child: CustomCard(
+                    title: 'Height',
+                    padding: EdgeInsets.fromLTRB(0, 10, 10, 10),
+                    child: LayoutBuilder(
+                      builder: (_, BoxConstraints constraints) {
+                        return HeightCardSection(
+                          doubleHeight: constraints.maxHeight,
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: _setWeightSection(),
+                ),
               ],
             ),
           ),
         ],
       ),
-    );
-  }
-
-  Widget _setHeightSection() {
-    return CustomCard(
-      title: 'Height',
-      child: Container(),
     );
   }
 
