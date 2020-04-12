@@ -5,11 +5,15 @@ class CustomCard extends StatelessWidget {
     @required this.title,
     @required this.child,
     this.padding = const EdgeInsets.all(10),
+    this.subtitle,
+    this.message,
   });
 
   final String title;
   final Widget child;
   final EdgeInsetsGeometry padding;
+  final String subtitle;
+  final String message;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +44,31 @@ class CustomCard extends StatelessWidget {
                 child: child,
               ),
             ),
+            if (title != null && message != null)
+              Padding(
+                padding: EdgeInsets.only(top: 10),
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      subtitle,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 5),
+                      child: Text(
+                        message,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
           ],
         ),
       ),

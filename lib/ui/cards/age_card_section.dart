@@ -117,36 +117,14 @@ class _AgeCardSectionState extends State<AgeCardSection>
                           ),
                         );
                       }),
-                      onSelectedItemChanged: (int value) =>
-                          setState(() => _age = value),
+                      onSelectedItemChanged: (int value) {
+                        setState(() => _age = value);
+                        widget.onChangeAge(value);
+                      },
                     ),
                   ),
                 ),
               ],
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 18),
-              child: Column(
-                children: <Widget>[
-                  Text(
-                    'Age selected',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 5),
-                    child: Text(
-                      '$_age years',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w300,
-                      ),
-                    ),
-                  )
-                ],
-              ),
             ),
           ],
         ),

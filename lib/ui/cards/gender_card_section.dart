@@ -103,24 +103,6 @@ class _GenderCardSectionState extends State<GenderCardSection>
               ],
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 30),
-            child: Column(
-              children: <Widget>[
-                Text(
-                  'Gender selected',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 5),
-                  child: Text(
-                    _currentGender ?? 'No selected',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
-                  ),
-                )
-              ],
-            ),
-          ),
         ],
       ),
     );

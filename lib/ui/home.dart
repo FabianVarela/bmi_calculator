@@ -16,6 +16,7 @@ class HomeBMI extends StatefulWidget {
 class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
   Gender _currentGender;
   int _currentAge;
+  int _currentHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +89,8 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
                 Expanded(
                   child: CustomCard(
                     title: 'Gender',
+                    subtitle: 'Gender selected',
+                    message: _currentGender?.name ?? 'No selected',
                     child: GenderCardSection(
                       onChangeGender: (Gender gender) {
                         setState(() => _currentGender = gender);
@@ -98,6 +101,8 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
                 Expanded(
                   child: CustomCard(
                     title: 'Age',
+                    subtitle: 'Age selected',
+                    message: '${_currentAge ?? 0} years',
                     child: AgeCardSection(
                       gender: _currentGender,
                       onChangeAge: (int age) {
@@ -117,31 +122,32 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
                   flex: 2,
                   child: CustomCard(
                     title: 'Height',
+                    subtitle: 'Height selected',
+                    message: '${_currentHeight ?? 0} cm',
                     padding: EdgeInsets.fromLTRB(0, 10, 10, 10),
                     child: LayoutBuilder(
                       builder: (_, BoxConstraints constraints) {
                         return HeightCardSection(
                           doubleHeight: constraints.maxHeight,
+                          onChangeHeight: (int height) {
+                            setState(() => _currentHeight = height);
+                          },
                         );
                       },
                     ),
                   ),
                 ),
                 Expanded(
-                  child: _setWeightSection(),
+                  child: CustomCard(
+                    title: 'Weight',
+                    child: Container(),
+                  ),
                 ),
               ],
             ),
           ),
         ],
       ),
-    );
-  }
-
-  Widget _setWeightSection() {
-    return CustomCard(
-      title: 'Weight',
-      child: Container(),
     );
   }
 

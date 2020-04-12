@@ -5,11 +5,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class HeightCardSection extends StatefulWidget {
   HeightCardSection({
-    this.doubleHeight,
+    @required this.doubleHeight,
+    @required this.onChangeHeight,
     this.minHeight = 140,
     this.maxHeight = 200,
   });
 
+  final Function(int height) onChangeHeight;
   final int minHeight;
   final int maxHeight;
   final double doubleHeight;
@@ -23,7 +25,7 @@ class HeightCardSection extends StatefulWidget {
 class _HeightCardSectionState extends State<HeightCardSection> {
   int _currentHeight;
 
-  double get _drawHeight => widget.doubleHeight - (16 + 50 + 14);
+  double get _drawHeight => widget.doubleHeight - (16 + 7 + 14);
 
   double get _pixelsHeight => _drawHeight / widget.total;
 
@@ -40,6 +42,9 @@ class _HeightCardSectionState extends State<HeightCardSection> {
   void initState() {
     super.initState();
     _currentHeight = _currentHeight ?? 170;
+
+    Future<void>.delayed(Duration(milliseconds: 100),
+        () => widget.onChangeHeight(_currentHeight));
   }
 
   @override
@@ -61,27 +66,6 @@ class _HeightCardSectionState extends State<HeightCardSection> {
               ],
             ),
           ),
-        ),
-        Column(
-          children: <Widget>[
-            Text(
-              'Height selected',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 5),
-              child: Text(
-                '$_currentHeight cm',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
-            )
-          ],
         ),
       ],
     );
@@ -174,7 +158,7 @@ class _HeightCardSectionState extends State<HeightCardSection> {
   void _onTapHeight(TapDownDetails details) {
     final int height = _offsetHeight(details.globalPosition);
     setState(() => _currentHeight = _normalizeHeight(height));
-    print(_currentHeight); // TODO: Change Function(int)
+    widget.onChangeHeight(_currentHeight);
   }
 
   void _onDragStartHeight(DragStartDetails dragStartDetails) {
@@ -184,7 +168,7 @@ class _HeightCardSectionState extends State<HeightCardSection> {
       _startDragHeight = newHeight;
       _currentHeight = newHeight;
     });
-    print(_currentHeight); // TODO: Change Function(int)
+    widget.onChangeHeight(_currentHeight);
   }
 
   void _onDragUpdateHeight(DragUpdateDetails dragUpdateDetails) {
@@ -194,7 +178,7 @@ class _HeightCardSectionState extends State<HeightCardSection> {
     setState(() {
       _currentHeight = _normalizeHeight(_startDragHeight + diffHeight);
     });
-    print(_currentHeight); // TODO: Change Function(int)
+    widget.onChangeHeight(_currentHeight);
   }
 
   int _normalizeHeight(int height) =>
