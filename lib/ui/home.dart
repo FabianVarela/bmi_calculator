@@ -2,6 +2,7 @@ import 'package:bmi_calculator/model/gender.dart';
 import 'package:bmi_calculator/ui/cards/age_card_section.dart';
 import 'package:bmi_calculator/ui/cards/gender_card_section.dart';
 import 'package:bmi_calculator/ui/cards/height_card_section.dart';
+import 'package:bmi_calculator/ui/cards/weight_card_section.dart';
 import 'package:bmi_calculator/ui/common/custom_card.dart';
 import 'package:bmi_calculator/ui/common/header_clip_path.dart';
 import 'package:bmi_calculator/ui/common/profile_icon_animation.dart';
@@ -17,6 +18,7 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
   Gender _currentGender;
   int _currentAge;
   int _currentHeight;
+  int _currentWeight;
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +142,13 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
                 Expanded(
                   child: CustomCard(
                     title: 'Weight',
-                    child: Container(),
+                    subtitle: 'Weight selected',
+                    message: '${_currentWeight ?? 0} Kg',
+                    child: WeightCardSection(
+                      onChangeWeight: (int weight) {
+                        setState(() => _currentWeight = weight);
+                      },
+                    ),
                   ),
                 ),
               ],
