@@ -25,3 +25,4 @@ flutter:
   assets:
     - assets/images/gender/
     - assets/images/age/
+    - assets/images/height/
