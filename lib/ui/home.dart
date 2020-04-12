@@ -6,6 +6,7 @@ import 'package:bmi_calculator/ui/cards/weight_card_section.dart';
 import 'package:bmi_calculator/ui/common/custom_card.dart';
 import 'package:bmi_calculator/ui/common/header_clip_path.dart';
 import 'package:bmi_calculator/ui/common/profile_icon_animation.dart';
+import 'package:bmi_calculator/ui/common/row_text_animation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -169,14 +170,7 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),
         ),
-        child: Text(
-          'Calculate',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w700,
-            color: Colors.white,
-          ),
-        ),
+        child: RowTextAnimation(text: 'Calculate'),
       ),
     );
   }
