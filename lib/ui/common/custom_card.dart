@@ -19,7 +19,7 @@ class CustomCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 10,
-      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+      margin: EdgeInsets.all(3),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Container(
         height: double.infinity,
@@ -38,12 +38,7 @@ class CustomCard extends StatelessWidget {
                 ),
               ),
             ),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.only(top: 12),
-                child: child,
-              ),
-            ),
+            child,
             if (title != null && message != null)
               Padding(
                 padding: EdgeInsets.only(top: 10),
