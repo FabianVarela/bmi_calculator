@@ -19,6 +19,9 @@ class _WeightCardSectionState extends State<WeightCardSection> {
   void initState() {
     super.initState();
     _currentWeight = _currentWeight ?? 70;
+
+    Future<void>.delayed(Duration(milliseconds: 100),
+        () => widget.onChangeWeight(_currentWeight));
   }
 
   @override
@@ -28,11 +31,11 @@ class _WeightCardSectionState extends State<WeightCardSection> {
         alignment: Alignment.bottomCenter,
         children: <Widget>[
           Container(
-            height: 100,
-            width: 100,
+            height: 80,
+            width: 80,
             decoration: BoxDecoration(
               color: Colors.grey.withOpacity(.5),
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(50),
             ),
             child: LayoutBuilder(
               builder: (_, BoxConstraints constraints) => WeightSlider(
@@ -149,7 +152,7 @@ class WeightSlider extends StatelessWidget {
       }
 
       if (middleValue != weightValue) {
-        onChanged(middleValue); //update selection
+        onChanged(middleValue);
       }
     }
 

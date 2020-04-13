@@ -57,6 +57,7 @@ class _AgeCardSectionState extends State<AgeCardSection>
     _setImage();
 
     return Stack(
+      alignment: Alignment.center,
       children: <Widget>[
         if (_currentAssetImage.isNotEmpty)
           FadeTransition(
@@ -68,13 +69,14 @@ class _AgeCardSectionState extends State<AgeCardSection>
                   _currentAssetImage,
                   fit: BoxFit.contain,
                   width: 150,
-                  height: 250,
+                  height: MediaQuery.of(context).size.height * 0.22,
                 ),
               ),
             ),
           ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Icon(
               Icons.arrow_right,
@@ -83,7 +85,7 @@ class _AgeCardSectionState extends State<AgeCardSection>
             ),
             Expanded(
               child: Container(
-                height: 161,
+                height: MediaQuery.of(context).size.height * 0.2,
                 child: ListWheelScrollView(
                   controller: _controller,
                   itemExtent: 40,

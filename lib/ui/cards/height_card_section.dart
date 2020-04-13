@@ -107,7 +107,7 @@ class _HeightCardSectionState extends State<HeightCardSection> {
                   child: Icon(
                     Icons.unfold_more,
                     color: Colors.white,
-                    size: 30,
+                    size: 28,
                   ),
                 ),
                 Expanded(
