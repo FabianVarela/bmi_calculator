@@ -128,15 +128,17 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
                     subtitle: 'Height selected',
                     message: '${_currentHeight ?? 0} cm',
                     padding: EdgeInsets.fromLTRB(0, 10, 10, 10),
-                    child: LayoutBuilder(
-                      builder: (_, BoxConstraints constraints) {
-                        return HeightCardSection(
-                          doubleHeight: constraints.maxHeight,
-                          onChangeHeight: (int height) {
-                            setState(() => _currentHeight = height);
-                          },
-                        );
-                      },
+                    child: Expanded(
+                      child: LayoutBuilder(
+                        builder: (_, BoxConstraints constraints) {
+                          return HeightCardSection(
+                            doubleHeight: constraints.maxHeight,
+                            onChangeHeight: (int height) {
+                              setState(() => _currentHeight = height);
+                            },
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),
