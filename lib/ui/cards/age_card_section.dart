@@ -88,11 +88,11 @@ class _AgeCardSectionState extends State<AgeCardSection>
                 height: MediaQuery.of(context).size.height * 0.2,
                 child: ListWheelScrollView(
                   controller: _controller,
-                  itemExtent: 40,
+                  itemExtent: 30,
                   magnification: 1.5,
                   useMagnifier: true,
                   physics: FixedExtentScrollPhysics(),
-                  offAxisFraction: -0.4,
+                  offAxisFraction: -0.5,
                   children: List<Widget>.generate(91, (int index) {
                     return Container(
                       padding: EdgeInsets.all(3),

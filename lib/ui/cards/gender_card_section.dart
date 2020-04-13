@@ -36,6 +36,8 @@ class _GenderCardSectionState extends State<GenderCardSection>
 
   @override
   void initState() {
+    super.initState();
+
     _currentGender = 'Other';
     _controller = AnimationController(
       vsync: this,
@@ -44,7 +46,10 @@ class _GenderCardSectionState extends State<GenderCardSection>
       value: _genderAngles[_currentGender],
     );
 
-    super.initState();
+    Future<void>.delayed(
+      Duration(milliseconds: 100),
+      () => widget.onChangeGender(_genderList[1]),
+    );
   }
 
   @override
@@ -55,8 +60,8 @@ class _GenderCardSectionState extends State<GenderCardSection>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
+    return Padding(
+      padding: EdgeInsets.only(top: 16),
       child: Container(
         width: double.infinity,
         child: Stack(
@@ -113,7 +118,7 @@ class GenderIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 55),
+      padding: EdgeInsets.only(bottom: 50),
       child: Transform.rotate(
         alignment: Alignment.bottomCenter,
         angle: _genderAngles[gender.name],
@@ -125,7 +130,7 @@ class GenderIcon extends StatelessWidget {
               Transform.rotate(
                 angle: -_genderAngles[gender.name],
                 child: Padding(
-                  padding: EdgeInsets.only(left: gender.isOther ? 8 : 0),
+                  padding: EdgeInsets.only(left: gender.isOther ? 10 : 0),
                   child: SvgPicture.asset(
                     gender.asset,
                     height: gender.isOther ? 24 : 18,
