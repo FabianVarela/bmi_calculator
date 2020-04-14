@@ -5,6 +5,7 @@ import 'package:bmi_calculator/ui/cards/height_card_section.dart';
 import 'package:bmi_calculator/ui/cards/weight_card_section.dart';
 import 'package:bmi_calculator/ui/common/custom_card.dart';
 import 'package:bmi_calculator/ui/common/header_clip_path.dart';
+import 'package:bmi_calculator/ui/common/interval_column_bottom_animation.dart';
 import 'package:bmi_calculator/ui/common/profile_icon_animation.dart';
 import 'package:bmi_calculator/ui/common/row_text_animation.dart';
 import 'package:flutter/cupertino.dart';
@@ -35,17 +36,19 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
               width: MediaQuery.of(context).size.width,
             ),
           ),
-          Container(
-            padding: EdgeInsets.fromLTRB(20, 0, 20, 25),
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                _setHeader(),
-                _setBody(),
-                _setButton(),
-              ],
+          Positioned.fill(
+            child: Container(
+              padding: EdgeInsets.fromLTRB(20, 50, 20, 20),
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: IntervalColumnBottomAnimation(
+                height: MediaQuery.of(context).size.height,
+                children: <Widget>[
+                  _setHeader(),
+                  _setBody(),
+                  _setButton(),
+                ],
+              ),
             ),
           ),
         ],
@@ -55,7 +58,7 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
 
   Widget _setHeader() {
     return Padding(
-      padding: EdgeInsets.only(top: 50, bottom: 20),
+      padding: EdgeInsets.only(bottom: 11),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         elevation: 10,
@@ -81,7 +84,8 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
   }
 
   Widget _setBody() {
-    return Expanded(
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.73,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
