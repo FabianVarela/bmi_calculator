@@ -3,11 +3,12 @@ import 'package:bmi_calculator/ui/cards/age_card_section.dart';
 import 'package:bmi_calculator/ui/cards/gender_card_section.dart';
 import 'package:bmi_calculator/ui/cards/height_card_section.dart';
 import 'package:bmi_calculator/ui/cards/weight_card_section.dart';
+import 'package:bmi_calculator/ui/common/calculate_button.dart';
 import 'package:bmi_calculator/ui/common/custom_card.dart';
 import 'package:bmi_calculator/ui/common/header_clip_path.dart';
 import 'package:bmi_calculator/ui/common/interval_column_bottom_animation.dart';
 import 'package:bmi_calculator/ui/common/profile_icon_animation.dart';
-import 'package:bmi_calculator/ui/common/row_text_animation.dart';
+import 'package:bmi_calculator/ui/translation_screen.ui.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -22,37 +23,65 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
   int _currentHeight;
   int _currentWeight;
 
+  AnimationController _buttonAnimationController;
+
+  @override
+  void initState() {
+    super.initState();
+    _buttonAnimationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+    );
+
+    _buttonAnimationController.addStatusListener((AnimationStatus status) {
+      if (status == AnimationStatus.completed) {
+        _goToResult().then((_) => _buttonAnimationController.reset());
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _buttonAnimationController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Stack(
-        children: <Widget>[
-          ClipPath(
-            clipper: HeaderClipPath(),
-            child: Container(
-              color: Colors.blueAccent,
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-            ),
-          ),
-          Positioned.fill(
-            child: Container(
-              padding: EdgeInsets.fromLTRB(20, 50, 20, 20),
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              child: IntervalColumnBottomAnimation(
-                height: MediaQuery.of(context).size.height,
-                children: <Widget>[
-                  _setHeader(),
-                  _setBody(),
-                  _setButton(),
-                ],
+    return Stack(
+      children: <Widget>[
+        Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: Stack(
+            children: <Widget>[
+              ClipPath(
+                clipper: HeaderClipPath(),
+                child: Container(
+                  color: Colors.blueAccent,
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                ),
               ),
-            ),
+              Positioned.fill(
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(20, 50, 20, 20),
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  child: IntervalColumnBottomAnimation(
+                    height: MediaQuery.of(context).size.height,
+                    children: <Widget>[
+                      _setHeader(),
+                      _setBody(),
+                      _setButton(),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+        TransitionScreen(listenable: _buttonAnimationController),
+      ],
     );
   }
 
@@ -85,7 +114,7 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
 
   Widget _setBody() {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.73,
+      height: MediaQuery.of(context).size.height * 0.72,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
@@ -168,15 +197,41 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
 
   Widget _setButton() {
     return Padding(
-      padding: EdgeInsets.only(top: 10),
-      child: RaisedButton(
-        onPressed: () {},
-        color: Colors.indigo,
-        padding: EdgeInsets.symmetric(vertical: 15),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5),
+      padding: EdgeInsets.only(top: 15),
+      child: CalculateButton(
+        animationController: _buttonAnimationController,
+        onPressedCalculateBMI: _onSubmit,
+      ),
+    );
+  }
+
+  void _onSubmit() {
+    Future<void>.delayed(
+      Duration(milliseconds: 500),
+      () => _buttonAnimationController.forward(),
+    );
+  }
+
+  Future<void> _goToResult() async {
+    return Navigator.of(context).push(
+      PageRouteBuilder<dynamic>(
+        transitionDuration: Duration(milliseconds: 500),
+        pageBuilder: (_, __, ___) => Scaffold(
+          body: Container(
+            child: Center(
+              child: Text(
+                'Página de resultados',
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
+              ),
+            ),
+          ),
         ),
-        child: RowTextAnimation(text: 'Calculate'),
+        transitionsBuilder: (_, Animation<double> animation, __, Widget child) {
+          return FadeTransition(
+            opacity: animation,
+            child: child,
+          );
+        },
       ),
     );
   }
