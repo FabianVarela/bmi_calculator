@@ -5,9 +5,10 @@ import 'package:bmi_calculator/ui/cards/height_card_section.dart';
 import 'package:bmi_calculator/ui/cards/weight_card_section.dart';
 import 'package:bmi_calculator/ui/common/calculate_button.dart';
 import 'package:bmi_calculator/ui/common/custom_card.dart';
-import 'package:bmi_calculator/ui/common/header_clip_path.dart';
+import 'package:bmi_calculator/ui/common/custom_clip_path.dart';
 import 'package:bmi_calculator/ui/common/interval_column_bottom_animation.dart';
 import 'package:bmi_calculator/ui/common/profile_icon_animation.dart';
+import 'package:bmi_calculator/ui/result.ui.dart';
 import 'package:bmi_calculator/ui/translation_screen.ui.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -51,11 +52,10 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
     return Stack(
       children: <Widget>[
         Scaffold(
-          resizeToAvoidBottomInset: false,
           body: Stack(
             children: <Widget>[
               ClipPath(
-                clipper: HeaderClipPath(),
+                clipper: TriangleClipPath(),
                 child: Container(
                   color: Colors.blueAccent,
                   height: MediaQuery.of(context).size.height,
@@ -69,6 +69,7 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
                   height: MediaQuery.of(context).size.height,
                   child: IntervalColumnBottomAnimation(
                     height: MediaQuery.of(context).size.height,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       _setHeader(),
                       _setBody(),
@@ -216,16 +217,7 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
     return Navigator.of(context).push(
       PageRouteBuilder<dynamic>(
         transitionDuration: Duration(milliseconds: 500),
-        pageBuilder: (_, __, ___) => Scaffold(
-          body: Container(
-            child: Center(
-              child: Text(
-                'Página de resultados',
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
-              ),
-            ),
-          ),
-        ),
+        pageBuilder: (_, __, ___) => ResultUI(),
         transitionsBuilder: (_, Animation<double> animation, __, Widget child) {
           return FadeTransition(
             opacity: animation,
