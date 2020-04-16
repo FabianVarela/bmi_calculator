@@ -4,10 +4,16 @@ class IntervalColumnBottomAnimation extends StatefulWidget {
   IntervalColumnBottomAnimation({
     @required this.children,
     @required this.height,
+    this.duration = const Duration(milliseconds: 1100),
+    this.mainAxisAlignment = MainAxisAlignment.start,
+    this.crossAxisAlignment = CrossAxisAlignment.center,
   });
 
   final List<Widget> children;
   final double height;
+  final Duration duration;
+  final MainAxisAlignment mainAxisAlignment;
+  final CrossAxisAlignment crossAxisAlignment;
 
   @override
   _IntervalColumnBottomAnimationState createState() =>
@@ -24,7 +30,7 @@ class _IntervalColumnBottomAnimationState
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 1100),
+      duration: widget.duration,
     );
 
     _animations = widget.children.map((Widget item) {
@@ -55,7 +61,8 @@ class _IntervalColumnBottomAnimationState
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisAlignment: widget.mainAxisAlignment,
+      crossAxisAlignment: widget.crossAxisAlignment,
       children: widget.children.map((Widget item) {
         final int index = widget.children.indexOf(item);
         return AnimatedBuilder(
