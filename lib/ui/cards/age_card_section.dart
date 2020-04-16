@@ -150,7 +150,7 @@ class _AgeCardSectionState extends State<AgeCardSection>
         _currentSeason = season;
         _animationController.reverse();
 
-        Future<void>.delayed(Duration(milliseconds: 200), () {
+        Future<void>.delayed(Duration(milliseconds: 1000), () {
           setState(() => _currentAssetImage =
               'assets/images/age/$season\_$genderLowerCase.png');
           _animationController.forward();
