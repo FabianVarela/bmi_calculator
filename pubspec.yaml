@@ -26,3 +26,14 @@ flutter:
     - assets/images/gender/
     - assets/images/age/
     - assets/images/height/
+
+  fonts:
+    - family: Catamaran
+      fonts:
+        - asset: assets/fonts/Catamaran-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Catamaran-Regular.ttf
+        - asset: assets/fonts/Catamaran-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Catamaran-Thin.ttf
+          weight: 100
