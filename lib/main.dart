@@ -13,6 +13,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'BMI',
+      theme: ThemeData(
+        fontFamily: 'Catamaran',
+      ),
       home: HomeBMI(),
     );
   }
