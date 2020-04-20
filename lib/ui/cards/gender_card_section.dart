@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:bmi_calculator/model/gender.dart';
+import 'package:bmi_calculator/ui/utils/responsive.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -61,7 +62,9 @@ class _GenderCardSectionState extends State<GenderCardSection>
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 16),
+      padding: EdgeInsets.only(
+        top: Responsive.getInstance().setHeight(16),
+      ),
       child: Container(
         width: double.infinity,
         child: Stack(
@@ -71,8 +74,8 @@ class _GenderCardSectionState extends State<GenderCardSection>
               alignment: Alignment.center,
               children: <Widget>[
                 Container(
-                  width: 100,
-                  height: 100,
+                  width: Responsive.getInstance().setWidth(100),
+                  height: Responsive.getInstance().setHeight(100),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.grey.withOpacity(.6),
@@ -117,32 +120,40 @@ class GenderIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Responsive responsive = Responsive.getInstance();
+    final double heightAsset = responsive.setHeight(gender.isOther ? 24 : 18);
+    final double widthAsset = responsive.setWidth(gender.isOther ? 24 : 18);
+
     return Padding(
-      padding: EdgeInsets.only(bottom: 50),
+      padding: EdgeInsets.only(bottom: responsive.setHeight(50)),
       child: Transform.rotate(
         alignment: Alignment.bottomCenter,
         angle: _genderAngles[gender.name],
         child: Padding(
-          padding: EdgeInsets.only(bottom: 50),
+          padding: EdgeInsets.only(bottom: responsive.setHeight(50)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Transform.rotate(
                 angle: -_genderAngles[gender.name],
                 child: Padding(
-                  padding: EdgeInsets.only(left: gender.isOther ? 10 : 0),
+                  padding: EdgeInsets.only(
+                      left: gender.isOther ? responsive.setWidth(10) : 0),
                   child: SvgPicture.asset(
                     gender.asset,
-                    height: gender.isOther ? 24 : 18,
-                    width: gender.isOther ? 24 : 18,
+                    height: heightAsset,
+                    width: widthAsset,
                   ),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(bottom: 8, top: 10),
+                padding: EdgeInsets.only(
+                  bottom: responsive.setHeight(8),
+                  top: responsive.setHeight(10),
+                ),
                 child: Container(
-                  height: 10,
-                  width: 2,
+                  height: responsive.setHeight(10),
+                  width: responsive.setWidth(2),
                   color: Colors.grey,
                 ),
               ),

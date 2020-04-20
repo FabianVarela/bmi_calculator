@@ -1,4 +1,5 @@
 import 'package:bmi_calculator/model/gender.dart';
+import 'package:bmi_calculator/ui/utils/responsive.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -68,7 +69,7 @@ class _AgeCardSectionState extends State<AgeCardSection>
                 child: Image.asset(
                   _currentAssetImage,
                   fit: BoxFit.contain,
-                  width: 150,
+                  width: Responsive.getInstance().setWidth(150),
                   height: MediaQuery.of(context).size.height * 0.22,
                 ),
               ),
@@ -107,7 +108,7 @@ class _AgeCardSectionState extends State<AgeCardSection>
                         child: Text(
                           '$index',
                           style: TextStyle(
-                            fontSize: 15,
+                            fontSize: Responsive.getInstance().setSp(15),
                             color: index == _age ? Colors.white : null,
                             fontWeight: index == _age
                                 ? FontWeight.w300

@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:bmi_calculator/ui/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -31,8 +32,8 @@ class _WeightCardSectionState extends State<WeightCardSection> {
         alignment: Alignment.bottomCenter,
         children: <Widget>[
           Container(
-            height: 80,
-            width: 80,
+            height: Responsive.getInstance().setHeight(80),
+            width: Responsive.getInstance().setWidth(80),
             decoration: BoxDecoration(
               color: Colors.grey.withOpacity(.5),
               borderRadius: BorderRadius.circular(50),
@@ -105,7 +106,8 @@ class WeightSlider extends StatelessWidget {
                     child: Text(
                       '$itemValue',
                       style: TextStyle(
-                        fontSize: itemValue == weightValue ? 28 : 14,
+                        fontSize: Responsive.getInstance()
+                            .setSp(itemValue == weightValue ? 28 : 14),
                         color: itemValue == weightValue
                             ? Colors.blueGrey
                             : Colors.black,
