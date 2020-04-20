@@ -1,4 +1,5 @@
 import 'package:bmi_calculator/model/gender.dart';
+import 'package:bmi_calculator/ui/animation/shake_animation.dart';
 import 'package:bmi_calculator/ui/cards/age_card_section.dart';
 import 'package:bmi_calculator/ui/cards/gender_card_section.dart';
 import 'package:bmi_calculator/ui/cards/height_card_section.dart';
@@ -6,8 +7,7 @@ import 'package:bmi_calculator/ui/cards/weight_card_section.dart';
 import 'package:bmi_calculator/ui/common/calculate_button.dart';
 import 'package:bmi_calculator/ui/common/custom_card.dart';
 import 'package:bmi_calculator/ui/common/custom_clip_path.dart';
-import 'package:bmi_calculator/ui/common/interval_column_bottom_animation.dart';
-import 'package:bmi_calculator/ui/common/profile_icon_animation.dart';
+import 'package:bmi_calculator/ui/animation/interval_column_bottom_animation.dart';
 import 'package:bmi_calculator/ui/result.ui.dart';
 import 'package:bmi_calculator/ui/translation_screen.ui.dart';
 import 'package:flutter/cupertino.dart';
@@ -105,9 +105,12 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
                   ),
                 ),
               ),
-              ProfileIconAnimation(
-                durationSeconds: 1,
-                onPressed: () => print('My profile'),
+              ShakeAnimation(
+                child: IconButton(
+                  onPressed: () => print('My profile'),
+                  padding: EdgeInsets.zero,
+                  icon: Icon(Icons.account_circle, size: 40),
+                ),
               ),
             ],
           ),

@@ -1,5 +1,5 @@
 import 'package:bmi_calculator/ui/common/custom_clip_path.dart';
-import 'package:bmi_calculator/ui/common/interval_column_bottom_animation.dart';
+import 'package:bmi_calculator/ui/animation/interval_column_bottom_animation.dart';
 import 'package:flutter/material.dart';
 
 class ResultUI extends StatefulWidget {
