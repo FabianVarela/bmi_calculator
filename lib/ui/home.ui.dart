@@ -9,7 +9,7 @@ import 'package:bmi_calculator/ui/common/custom_card.dart';
 import 'package:bmi_calculator/ui/common/custom_clip_path.dart';
 import 'package:bmi_calculator/ui/animation/interval_column_bottom_animation.dart';
 import 'package:bmi_calculator/ui/result.ui.dart';
-import 'package:bmi_calculator/ui/translation_screen.ui.dart';
+import 'package:bmi_calculator/ui/animation/translation_screen.ui.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
