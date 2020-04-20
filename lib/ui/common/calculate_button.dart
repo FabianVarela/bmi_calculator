@@ -1,4 +1,4 @@
-import 'package:bmi_calculator/ui/common/row_text_animation.dart';
+import 'package:bmi_calculator/ui/animation/row_text_animation.dart';
 import 'package:flutter/material.dart';
 
 class CalculateButton extends StatefulWidget {

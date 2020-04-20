@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 
-class ProfileIconAnimation extends StatefulWidget {
-  ProfileIconAnimation({@required this.durationSeconds, this.onPressed});
+class ShakeAnimation extends StatefulWidget {
+  ShakeAnimation({
+    @required this.child,
+    this.durationSeconds = 1,
+    this.begin = 16,
+    this.end = 0,
+  });
 
+  final Widget child;
   final int durationSeconds;
-  final Function onPressed;
+  final double begin;
+  final double end;
 
   @override
-  _ProfileIconAnimationState createState() => _ProfileIconAnimationState();
+  _ShakeAnimationState createState() => _ShakeAnimationState();
 }
 
-class _ProfileIconAnimationState extends State<ProfileIconAnimation>
+class _ShakeAnimationState extends State<ShakeAnimation>
     with SingleTickerProviderStateMixin {
   AnimationController _animationController;
   Animation<double> _shakeAnimation;
@@ -24,7 +31,7 @@ class _ProfileIconAnimationState extends State<ProfileIconAnimation>
       duration: Duration(seconds: widget.durationSeconds),
     );
 
-    _shakeAnimation = Tween<double>(begin: 16.0, end: 0.0)
+    _shakeAnimation = Tween<double>(begin: widget.begin, end: widget.end)
         .chain(CurveTween(curve: Curves.elasticIn))
         .animate(_animationController)
           ..addStatusListener((AnimationStatus status) {
@@ -53,11 +60,7 @@ class _ProfileIconAnimationState extends State<ProfileIconAnimation>
             left: _shakeAnimation.value + 24,
             right: 24 - _shakeAnimation.value,
           ),
-          child: IconButton(
-            onPressed: widget.onPressed ?? () {},
-            padding: EdgeInsets.zero,
-            icon: Icon(Icons.account_circle, size: 40),
-          ),
+          child: widget.child,
         );
       },
     );
