@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/ui/utils/responsive.dart';
 import 'package:flutter/material.dart';
 
 class CustomCard extends StatelessWidget {
@@ -20,7 +21,9 @@ class CustomCard extends StatelessWidget {
     return Card(
       elevation: 10,
       margin: EdgeInsets.all(3),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Container(
         height: double.infinity,
         width: double.infinity,
@@ -33,7 +36,7 @@ class CustomCard extends StatelessWidget {
               child: Text(
                 title,
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: Responsive.getInstance().setSp(18),
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -41,24 +44,23 @@ class CustomCard extends StatelessWidget {
             child,
             if (title != null && message != null)
               Padding(
-                padding: EdgeInsets.only(top: 10),
+                padding: EdgeInsets.only(
+                  top: Responsive.getInstance().setHeight(8),
+                ),
                 child: Column(
                   children: <Widget>[
                     Text(
                       subtitle,
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: Responsive.getInstance().setSp(18),
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 5),
-                      child: Text(
-                        message,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w300,
-                        ),
+                    Text(
+                      message,
+                      style: TextStyle(
+                        fontSize: Responsive.getInstance().setSp(16),
+                        fontWeight: FontWeight.w300,
                       ),
                     )
                   ],

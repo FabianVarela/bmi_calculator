@@ -1,4 +1,5 @@
 import 'package:bmi_calculator/ui/animation/row_text_animation.dart';
+import 'package:bmi_calculator/ui/utils/responsive.dart';
 import 'package:flutter/material.dart';
 
 class CalculateButton extends StatefulWidget {
@@ -56,14 +57,16 @@ class _CalculateButtonState extends State<CalculateButton> {
           builder: (_, Widget child) {
             return Center(
               child: Container(
-                height: 54,
+                height: Responsive.getInstance().setHeight(54),
                 width: _width,
                 child: RaisedButton(
                   onPressed: _widthAnimation.isDismissed
                       ? widget.onPressedCalculateBMI
                       : () {},
                   color: widget.backgroundColor,
-                  padding: EdgeInsets.symmetric(vertical: 15),
+                  padding: EdgeInsets.symmetric(
+                    vertical: Responsive.getInstance().setHeight(15),
+                  ),
                   shape: RoundedRectangleBorder(
                     borderRadius: _borderRadiusAnimation.value,
                   ),
@@ -71,6 +74,7 @@ class _CalculateButtonState extends State<CalculateButton> {
                       ? RowTextAnimation(
                           text: 'Calculate',
                           color: widget.color,
+                          fontSize: Responsive.getInstance().setSp(20),
                         )
                       : Container(),
                 ),
