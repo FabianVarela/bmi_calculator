@@ -9,7 +9,8 @@ import 'package:bmi_calculator/ui/common/custom_card.dart';
 import 'package:bmi_calculator/ui/common/custom_clip_path.dart';
 import 'package:bmi_calculator/ui/animation/interval_column_bottom_animation.dart';
 import 'package:bmi_calculator/ui/result.ui.dart';
-import 'package:bmi_calculator/ui/animation/translation_screen.ui.dart';
+import 'package:bmi_calculator/ui/animation/translation_screen_animation.dart';
+import 'package:bmi_calculator/ui/utils/responsive.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -64,7 +65,12 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
               ),
               Positioned.fill(
                 child: Container(
-                  padding: EdgeInsets.fromLTRB(20, 50, 20, 20),
+                  padding: EdgeInsets.fromLTRB(
+                    Responsive.getInstance().setWidth(20),
+                    Responsive.getInstance().setHeight(50),
+                    Responsive.getInstance().setWidth(20),
+                    Responsive.getInstance().setHeight(20),
+                  ),
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
                   child: IntervalColumnBottomAnimation(
@@ -88,19 +94,26 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
 
   Widget _setHeader() {
     return Padding(
-      padding: EdgeInsets.only(bottom: 11),
+      padding: EdgeInsets.only(
+        bottom: Responsive.getInstance().setHeight(11),
+      ),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         elevation: 10,
         child: Padding(
-          padding: EdgeInsets.fromLTRB(8, 8, 0, 8),
+          padding: EdgeInsets.fromLTRB(
+            Responsive.getInstance().setWidth(8),
+            Responsive.getInstance().setHeight(8),
+            Responsive.getInstance().setWidth(0),
+            Responsive.getInstance().setHeight(8),
+          ),
           child: Row(
             children: <Widget>[
               Expanded(
                 child: Text(
                   'BMI Calculator',
                   style: TextStyle(
-                    fontSize: 25,
+                    fontSize: Responsive.getInstance().setSp(25),
                     fontWeight: FontWeight.w700,
                   ),
                 ),
@@ -167,7 +180,12 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
                     title: 'Height',
                     subtitle: 'Height selected',
                     message: '${_currentHeight ?? 0} cm',
-                    padding: EdgeInsets.fromLTRB(0, 10, 10, 10),
+                    padding: EdgeInsets.fromLTRB(
+                      Responsive.getInstance().setWidth(0),
+                      Responsive.getInstance().setHeight(10),
+                      Responsive.getInstance().setWidth(10),
+                      Responsive.getInstance().setHeight(10),
+                    ),
                     child: Expanded(
                       child: LayoutBuilder(
                         builder: (_, BoxConstraints constraints) {
@@ -204,7 +222,9 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
 
   Widget _setButton() {
     return Padding(
-      padding: EdgeInsets.only(top: 15),
+      padding: EdgeInsets.only(
+        top: Responsive.getInstance().setHeight(15),
+      ),
       child: CalculateButton(
         animationController: _buttonAnimationController,
         onPressedCalculateBMI: _onSubmit,
