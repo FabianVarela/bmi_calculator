@@ -1,5 +1,6 @@
 import 'package:bmi_calculator/ui/common/custom_clip_path.dart';
 import 'package:bmi_calculator/ui/animation/interval_column_bottom_animation.dart';
+import 'package:bmi_calculator/ui/utils/responsive.dart';
 import 'package:flutter/material.dart';
 
 class ResultUI extends StatefulWidget {
@@ -24,7 +25,12 @@ class _ResultUIState extends State<ResultUI> {
           Container(height: MediaQuery.of(context).size.height),
           Positioned.fill(
             child: Container(
-              padding: EdgeInsets.fromLTRB(24, 50, 24, 120),
+              padding: EdgeInsets.fromLTRB(
+                Responsive.getInstance().setWidth(24),
+                Responsive.getInstance().setHeight(50),
+                Responsive.getInstance().setWidth(24),
+                Responsive.getInstance().setHeight(120),
+              ),
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
               child: IntervalColumnBottomAnimation(
@@ -55,12 +61,15 @@ class _ResultUIState extends State<ResultUI> {
 
   Widget _setTitle() {
     return Padding(
-      padding: EdgeInsets.only(top: 20, bottom: 30),
+      padding: EdgeInsets.only(
+        top: Responsive.getInstance().setHeight(20),
+        bottom: Responsive.getInstance().setHeight(30),
+      ),
       child: Text(
         'BMI final result',
         textAlign: TextAlign.center,
         style: TextStyle(
-          fontSize: 40,
+          fontSize: Responsive.getInstance().setSp(40),
           fontWeight: FontWeight.w700,
           color: Colors.white,
         ),
@@ -75,12 +84,14 @@ class _ResultUIState extends State<ResultUI> {
       ),
       elevation: 20,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 30),
+        padding: EdgeInsets.symmetric(
+          vertical: Responsive.getInstance().setHeight(30),
+        ),
         child: Text(
           '22.4',
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: 100,
+            fontSize: Responsive.getInstance().setSp(100),
             fontWeight: FontWeight.w700,
           ),
         ),
@@ -90,12 +101,14 @@ class _ResultUIState extends State<ResultUI> {
 
   Widget _setTextResult() {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 20),
+      padding: EdgeInsets.symmetric(
+        vertical: Responsive.getInstance().setHeight(20),
+      ),
       child: Text(
         'Overweight',
         textAlign: TextAlign.center,
         style: TextStyle(
-          fontSize: 35,
+          fontSize: Responsive.getInstance().setSp(35),
           fontWeight: FontWeight.w300,
         ),
       ),
@@ -104,36 +117,44 @@ class _ResultUIState extends State<ResultUI> {
 
   Widget _setMessage() {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 30),
+      padding: EdgeInsets.symmetric(
+        vertical: Responsive.getInstance().setHeight(30),
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.only(bottom: 5),
+            padding: EdgeInsets.only(
+              bottom: Responsive.getInstance().setHeight(5),
+            ),
             child: Text(
               'BMI = 22.93 kg/m2',
               style: TextStyle(
-                fontSize: 20,
+                fontSize: Responsive.getInstance().setSp(20),
                 fontWeight: FontWeight.w600,
               ),
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 5),
+            padding: EdgeInsets.only(
+              bottom: Responsive.getInstance().setHeight(5),
+            ),
             child: Text(
               'BMI weight range for the height:',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: Responsive.getInstance().setSp(18),
                 fontWeight: FontWeight.w300,
               ),
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 5),
+            padding: EdgeInsets.only(
+              bottom: Responsive.getInstance().setHeight(5),
+            ),
             child: Text(
               '128.9 lbs - 174.2 lbs',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: Responsive.getInstance().setSp(18),
                 fontWeight: FontWeight.w200,
               ),
             ),
@@ -161,7 +182,9 @@ class _ResultUIState extends State<ResultUI> {
   Widget _setIconButton(IconData icon, Function function,
       {bool isCircle = false}) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10),
+      margin: EdgeInsets.symmetric(
+        horizontal: Responsive.getInstance().setWidth(10),
+      ),
       padding: EdgeInsets.all(5),
       decoration: isCircle
           ? BoxDecoration(
@@ -189,8 +212,8 @@ class _ResultUIState extends State<ResultUI> {
         child: GestureDetector(
           onTap: () => print('My profile'),
           child: Container(
-            width: 200,
-            height: 200,
+            width: Responsive.getInstance().setWidth(200),
+            height: Responsive.getInstance().setHeight(200),
             padding: EdgeInsets.all(30),
             decoration: BoxDecoration(
               color: Colors.blueAccent,
