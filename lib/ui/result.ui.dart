@@ -85,13 +85,13 @@ class _ResultUIState extends State<ResultUI> {
       elevation: 20,
       child: Padding(
         padding: EdgeInsets.symmetric(
-          vertical: Responsive.getInstance().setHeight(30),
+          vertical: Responsive.getInstance().setHeight(20),
         ),
         child: Text(
           '22.4',
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: Responsive.getInstance().setSp(100),
+            fontSize: Responsive.getInstance().setSp(90),
             fontWeight: FontWeight.w700,
           ),
         ),
@@ -102,7 +102,7 @@ class _ResultUIState extends State<ResultUI> {
   Widget _setTextResult() {
     return Padding(
       padding: EdgeInsets.symmetric(
-        vertical: Responsive.getInstance().setHeight(20),
+        vertical: Responsive.getInstance().setHeight(16),
       ),
       child: Text(
         'Overweight',
