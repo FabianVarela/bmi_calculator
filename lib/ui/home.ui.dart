@@ -105,7 +105,10 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
                   ),
                 ),
               ),
-              ProfileIconAnimation(durationSeconds: 1),
+              ProfileIconAnimation(
+                durationSeconds: 1,
+                onPressed: () => print('My profile'),
+              ),
             ],
           ),
         ),
