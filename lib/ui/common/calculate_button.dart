@@ -5,10 +5,14 @@ class CalculateButton extends StatefulWidget {
   CalculateButton({
     @required this.animationController,
     @required this.onPressedCalculateBMI,
+    this.backgroundColor = Colors.blue,
+    this.color = Colors.white,
   });
 
   final AnimationController animationController;
   final Function onPressedCalculateBMI;
+  final Color backgroundColor;
+  final Color color;
 
   @override
   _CalculateButtonState createState() => _CalculateButtonState();
@@ -58,13 +62,16 @@ class _CalculateButtonState extends State<CalculateButton> {
                   onPressed: _widthAnimation.isDismissed
                       ? widget.onPressedCalculateBMI
                       : () {},
-                  color: Colors.indigo,
+                  color: widget.backgroundColor,
                   padding: EdgeInsets.symmetric(vertical: 15),
                   shape: RoundedRectangleBorder(
                     borderRadius: _borderRadiusAnimation.value,
                   ),
                   child: _widthAnimation.isDismissed
-                      ? RowTextAnimation(text: 'Calculate')
+                      ? RowTextAnimation(
+                          text: 'Calculate',
+                          color: widget.color,
+                        )
                       : Container(),
                 ),
               ),

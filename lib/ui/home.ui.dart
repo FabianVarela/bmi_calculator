@@ -208,6 +208,8 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
       child: CalculateButton(
         animationController: _buttonAnimationController,
         onPressedCalculateBMI: _onSubmit,
+        backgroundColor: Colors.indigo,
+        color: Colors.white,
       ),
     );
   }

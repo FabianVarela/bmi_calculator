@@ -3,9 +3,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class RowTextAnimation extends StatefulWidget {
-  RowTextAnimation({@required this.text});
+  RowTextAnimation({@required this.text, this.color = Colors.white});
 
   final String text;
+  final Color color;
 
   @override
   _RowTextAnimationState createState() => _RowTextAnimationState();
@@ -65,7 +66,7 @@ class _RowTextAnimationState extends State<RowTextAnimation>
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
-                  color: Colors.white,
+                  color: widget.color,
                 ),
               ),
             ),
