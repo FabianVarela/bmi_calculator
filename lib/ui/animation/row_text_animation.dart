@@ -3,10 +3,15 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class RowTextAnimation extends StatefulWidget {
-  RowTextAnimation({@required this.text, this.color = Colors.white});
+  RowTextAnimation({
+    @required this.text,
+    this.color = Colors.white,
+    this.fontSize = 14,
+  });
 
   final String text;
   final Color color;
+  final double fontSize;
 
   @override
   _RowTextAnimationState createState() => _RowTextAnimationState();
@@ -46,33 +51,30 @@ class _RowTextAnimationState extends State<RowTextAnimation>
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 30),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: List<Widget>.generate(_charList.length, (int index) {
-          final Animation<double> animation = _initAnimation(index);
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: List<Widget>.generate(_charList.length, (int index) {
+        final Animation<double> animation = _initAnimation(index);
 
-          return AnimatedBuilder(
-            animation: animation,
-            builder: (_, Widget child) => Opacity(
-              opacity: animation.value,
-              child: child,
-            ),
-            child: Padding(
-              padding: EdgeInsets.only(left: 8, right: 8),
-              child: Text(
-                _charList[index],
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                  color: widget.color,
-                ),
+        return AnimatedBuilder(
+          animation: animation,
+          builder: (_, Widget child) => Opacity(
+            opacity: animation.value,
+            child: child,
+          ),
+          child: Padding(
+            padding: EdgeInsets.only(left: 8, right: 8),
+            child: Text(
+              _charList[index],
+              style: TextStyle(
+                fontSize: widget.fontSize,
+                fontWeight: FontWeight.w700,
+                color: widget.color,
               ),
             ),
-          );
-        }),
-      ),
+          ),
+        );
+      }),
     );
   }
 
