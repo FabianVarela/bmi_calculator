@@ -43,28 +43,23 @@ class CustomCard extends StatelessWidget {
             ),
             child,
             if (title != null && message != null)
-              Padding(
-                padding: EdgeInsets.only(
-                  top: Responsive.getInstance().setHeight(8),
-                ),
-                child: Column(
-                  children: <Widget>[
-                    Text(
-                      subtitle,
-                      style: TextStyle(
-                        fontSize: Responsive.getInstance().setSp(18),
-                        fontWeight: FontWeight.w500,
-                      ),
+              Column(
+                children: <Widget>[
+                  Text(
+                    subtitle,
+                    style: TextStyle(
+                      fontSize: Responsive.getInstance().setSp(18),
+                      fontWeight: FontWeight.w500,
                     ),
-                    Text(
-                      message,
-                      style: TextStyle(
-                        fontSize: Responsive.getInstance().setSp(16),
-                        fontWeight: FontWeight.w300,
-                      ),
-                    )
-                  ],
-                ),
+                  ),
+                  Text(
+                    message,
+                    style: TextStyle(
+                      fontSize: Responsive.getInstance().setSp(16),
+                      fontWeight: FontWeight.w300,
+                    ),
+                  )
+                ],
               ),
           ],
         ),
