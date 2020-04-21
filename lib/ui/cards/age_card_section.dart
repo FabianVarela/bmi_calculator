@@ -29,7 +29,7 @@ class _AgeCardSectionState extends State<AgeCardSection>
   void initState() {
     super.initState();
 
-    _age = 0;
+    _age = 2;
     _currentSeason = '';
 
     _animationController = AnimationController(
@@ -95,9 +95,11 @@ class _AgeCardSectionState extends State<AgeCardSection>
                   physics: FixedExtentScrollPhysics(),
                   offAxisFraction: -0.5,
                   children: List<Widget>.generate(91, (int index) {
+                    final int finalValue = index + 2;
+
                     return Container(
                       padding: EdgeInsets.all(3),
-                      decoration: index == _age
+                      decoration: finalValue == _age
                           ? BoxDecoration(
                               color: Colors.blueAccent,
                               shape: BoxShape.circle,
@@ -106,11 +108,11 @@ class _AgeCardSectionState extends State<AgeCardSection>
                       child: Align(
                         alignment: Alignment.center,
                         child: Text(
-                          '$index',
+                          '$finalValue',
                           style: TextStyle(
                             fontSize: Responsive.getInstance().setSp(15),
-                            color: index == _age ? Colors.white : null,
-                            fontWeight: index == _age
+                            color: finalValue == _age ? Colors.white : null,
+                            fontWeight: finalValue == _age
                                 ? FontWeight.w300
                                 : FontWeight.w600,
                           ),
@@ -119,8 +121,8 @@ class _AgeCardSectionState extends State<AgeCardSection>
                     );
                   }),
                   onSelectedItemChanged: (int value) {
-                    setState(() => _age = value);
-                    widget.onChangeAge(value);
+                    setState(() => _age = value + 2);
+                    widget.onChangeAge(value + 2);
                   },
                 ),
               ),
@@ -135,7 +137,7 @@ class _AgeCardSectionState extends State<AgeCardSection>
     if (widget.gender != null) {
       String season;
 
-      if (_age >= 0 && _age < 15) {
+      if (_age >= 2 && _age < 15) {
         season = 'child';
       } else if (_age >= 15 && _age < 30) {
         season = 'young';
