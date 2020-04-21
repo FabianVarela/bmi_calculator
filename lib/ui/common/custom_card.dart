@@ -36,7 +36,7 @@ class CustomCard extends StatelessWidget {
               child: Text(
                 title,
                 style: TextStyle(
-                  fontSize: Responsive.getInstance().setSp(18),
+                  fontSize: Responsive.getInstance().setSp(16),
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -48,14 +48,14 @@ class CustomCard extends StatelessWidget {
                   Text(
                     subtitle,
                     style: TextStyle(
-                      fontSize: Responsive.getInstance().setSp(18),
+                      fontSize: Responsive.getInstance().setSp(16),
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   Text(
                     message,
                     style: TextStyle(
-                      fontSize: Responsive.getInstance().setSp(16),
+                      fontSize: Responsive.getInstance().setSp(14),
                       fontWeight: FontWeight.w300,
                     ),
                   )
