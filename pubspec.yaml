@@ -28,12 +28,12 @@ flutter:
     - assets/images/height/
 
   fonts:
-    - family: Catamaran
+    - family: FiraSans
       fonts:
-        - asset: assets/fonts/Catamaran-Bold.ttf
+        - asset: assets/fonts/FiraSans-Bold.ttf
           weight: 700
-        - asset: assets/fonts/Catamaran-Regular.ttf
-        - asset: assets/fonts/Catamaran-Light.ttf
+        - asset: assets/fonts/FiraSans-Regular.ttf
+        - asset: assets/fonts/FiraSans-Light.ttf
           weight: 300
-        - asset: assets/fonts/Catamaran-Thin.ttf
+        - asset: assets/fonts/FiraSans-Thin.ttf
           weight: 100

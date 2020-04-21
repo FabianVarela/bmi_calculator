@@ -14,7 +14,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'BMI',
-      theme: ThemeData(fontFamily: 'Catamaran'),
+      theme: ThemeData(fontFamily: 'FiraSans'),
       home: Builder(builder: (BuildContext context) {
         final double width = MediaQuery.of(context).size.width;
         final double height = MediaQuery.of(context).size.height;
