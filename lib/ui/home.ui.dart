@@ -242,17 +242,24 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
   }
 
   void _onSubmit() {
-    Future<void>.delayed(
-      Duration(milliseconds: 500),
-      () => _buttonAnimationController.forward(),
-    );
+    if (_currentAge > 0 && _currentHeight > 0 && _currentWeight > 0) {
+      Future<void>.delayed(
+        Duration(milliseconds: 500),
+        () => _buttonAnimationController.forward(),
+      );
+    }
   }
 
   Future<void> _goToResult() async {
     return Navigator.of(context).push(
       PageRouteBuilder<dynamic>(
         transitionDuration: Duration(milliseconds: 500),
-        pageBuilder: (_, __, ___) => ResultUI(),
+        pageBuilder: (_, __, ___) => ResultUI(
+          userGender: _currentGender,
+          userAge: _currentAge,
+          userHeight: _currentHeight,
+          userWeight: _currentWeight,
+        ),
         transitionsBuilder: (_, Animation<double> animation, __, Widget child) {
           return FadeTransition(
             opacity: animation,

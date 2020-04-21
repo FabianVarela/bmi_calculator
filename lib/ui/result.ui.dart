@@ -1,14 +1,43 @@
+import 'dart:math';
+
+import 'package:bmi_calculator/model/gender.dart';
 import 'package:bmi_calculator/ui/common/custom_clip_path.dart';
 import 'package:bmi_calculator/ui/animation/interval_column_bottom_animation.dart';
 import 'package:bmi_calculator/ui/utils/responsive.dart';
 import 'package:flutter/material.dart';
 
 class ResultUI extends StatefulWidget {
+  ResultUI({
+    @required this.userGender,
+    @required this.userAge,
+    @required this.userHeight,
+    @required this.userWeight,
+  });
+
+  final Gender userGender;
+  final int userAge;
+  final int userHeight;
+  final int userWeight;
+
   @override
   _ResultUIState createState() => _ResultUIState();
 }
 
 class _ResultUIState extends State<ResultUI> {
+  String _bmiLevel;
+  double _bmiResult;
+
+  String _category;
+  String _bmiRange;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _calculateBMI();
+    _setCategory();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +63,7 @@ class _ResultUIState extends State<ResultUI> {
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
               child: IntervalColumnBottomAnimation(
-                duration: Duration(milliseconds: 800),
+                duration: Duration(milliseconds: 1000),
                 height: MediaQuery.of(context).size.height,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -88,7 +117,7 @@ class _ResultUIState extends State<ResultUI> {
             vertical: Responsive.getInstance().setHeight(25),
           ),
           child: Text(
-            '22.4',
+            '${_bmiResult.toStringAsFixed(1)}',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: Responsive.getInstance().setSp(90),
@@ -106,7 +135,7 @@ class _ResultUIState extends State<ResultUI> {
         vertical: Responsive.getInstance().setHeight(15),
       ),
       child: Text(
-        'Overweight',
+        '$_bmiLevel',
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: Responsive.getInstance().setSp(35),
@@ -124,25 +153,30 @@ class _ResultUIState extends State<ResultUI> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text(
-            'BMI = 22.93 kg/m2',
-            style: TextStyle(
-              fontSize: Responsive.getInstance().setSp(20),
-              fontWeight: FontWeight.w600,
+          Padding(
+            padding: EdgeInsets.only(
+              bottom: Responsive.getInstance().setHeight(5),
+            ),
+            child: Text(
+              'BMI = ${_bmiResult.toStringAsFixed(2)} kg/m2',
+              style: TextStyle(
+                fontSize: Responsive.getInstance().setSp(22),
+                fontWeight: FontWeight.w400,
+              ),
             ),
           ),
           Text(
-            'BMI weight range for the height:',
+            '$_category',
             style: TextStyle(
-              fontSize: Responsive.getInstance().setSp(18),
+              fontSize: Responsive.getInstance().setSp(22),
               fontWeight: FontWeight.w300,
             ),
           ),
           Text(
-            '128.9 lbs - 174.2 lbs',
+            '$_bmiRange',
             style: TextStyle(
-              fontSize: Responsive.getInstance().setSp(18),
-              fontWeight: FontWeight.w200,
+              fontSize: Responsive.getInstance().setSp(20),
+              fontWeight: FontWeight.w700,
             ),
           ),
         ],
@@ -218,5 +252,58 @@ class _ResultUIState extends State<ResultUI> {
         ),
       ),
     );
+  }
+
+  void _calculateBMI() {
+    double result;
+    String bmiLevel;
+
+    if (widget.userAge > 0 && widget.userAge < 19) {
+      // TODO: Pending percentile
+      result = (widget.userWeight / pow(widget.userHeight, 2)) * 10000;
+    } else {
+      final double heightMeters = (widget.userHeight / 100).toDouble();
+      result = widget.userWeight / pow(heightMeters, 2);
+    }
+
+    if (result < 18.5) {
+      bmiLevel = 'Underweight';
+    } else if (result >= 18.5 && result < 25) {
+      bmiLevel = 'Healthy';
+    } else if (result >= 25 && result < 30) {
+      bmiLevel = 'Overweight';
+    } else if (result >= 30) {
+      bmiLevel = 'Obese';
+    }
+
+    setState(() {
+      _bmiResult = result;
+      _bmiLevel = bmiLevel;
+    });
+  }
+
+  void _setCategory() {
+    setState(() {
+      if (widget.userAge > 0 && widget.userAge < 19) {
+        _category = 'BMI percentile for children';
+        _bmiRange = '-';
+      } else {
+        if (widget.userAge >= 19 && widget.userAge <= 24) {
+          _bmiRange = '19 - 24';
+        } else if (widget.userAge >= 25 && widget.userAge <= 34) {
+          _bmiRange = '20 - 25';
+        } else if (widget.userAge >= 35 && widget.userAge <= 44) {
+          _bmiRange = '21 - 26';
+        } else if (widget.userAge >= 45 && widget.userAge <= 54) {
+          _bmiRange = '22 - 27';
+        } else if (widget.userAge >= 55 && widget.userAge <= 64) {
+          _bmiRange = '23 - 28';
+        } else {
+          _bmiRange = '24 - 29';
+        }
+
+        _category = 'BMI range for adults:';
+      }
+    });
   }
 }
