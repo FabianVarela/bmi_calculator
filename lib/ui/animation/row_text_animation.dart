@@ -7,11 +7,13 @@ class RowTextAnimation extends StatefulWidget {
     @required this.text,
     this.color = Colors.white,
     this.fontSize = 14,
+    this.fontWeight = FontWeight.w400,
   });
 
   final String text;
   final Color color;
   final double fontSize;
+  final FontWeight fontWeight;
 
   @override
   _RowTextAnimationState createState() => _RowTextAnimationState();
@@ -68,7 +70,7 @@ class _RowTextAnimationState extends State<RowTextAnimation>
               _charList[index],
               style: TextStyle(
                 fontSize: widget.fontSize,
-                fontWeight: FontWeight.w700,
+                fontWeight: widget.fontWeight,
                 color: widget.color,
               ),
             ),

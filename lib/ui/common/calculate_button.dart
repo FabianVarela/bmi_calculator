@@ -75,6 +75,7 @@ class _CalculateButtonState extends State<CalculateButton> {
                           text: 'Calculate',
                           color: widget.color,
                           fontSize: Responsive.getInstance().setSp(20),
+                          fontWeight: FontWeight.w700,
                         )
                       : Container(),
                 ),
