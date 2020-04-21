@@ -67,7 +67,7 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
                 child: Container(
                   padding: EdgeInsets.fromLTRB(
                     Responsive.getInstance().setWidth(20),
-                    Responsive.getInstance().setHeight(50),
+                    Responsive.getInstance().setHeight(0),
                     Responsive.getInstance().setWidth(20),
                     Responsive.getInstance().setHeight(20),
                   ),
@@ -93,19 +93,18 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
   }
 
   Widget _setHeader() {
-    return Padding(
-      padding: EdgeInsets.only(
-        bottom: Responsive.getInstance().setHeight(11),
-      ),
+    return SafeArea(
+      top: true,
+      bottom: false,
       child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
         elevation: 10,
         child: Padding(
-          padding: EdgeInsets.fromLTRB(
-            Responsive.getInstance().setWidth(8),
-            Responsive.getInstance().setHeight(8),
-            Responsive.getInstance().setWidth(0),
-            Responsive.getInstance().setHeight(8),
+          padding: EdgeInsets.only(
+            left: Responsive.getInstance().setWidth(16),
+            right: Responsive.getInstance().setWidth(0),
           ),
           child: Row(
             children: <Widget>[
@@ -134,7 +133,7 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
 
   Widget _setBody() {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.72,
+      height: MediaQuery.of(context).size.height * 0.75,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
@@ -147,6 +146,10 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
                     title: 'Gender',
                     subtitle: 'Gender selected',
                     message: _currentGender?.name ?? 'No selected',
+                    padding: EdgeInsets.symmetric(
+                      horizontal: Responsive.getInstance().setWidth(10),
+                      vertical: Responsive.getInstance().setHeight(4),
+                    ),
                     child: GenderCardSection(
                       onChangeGender: (Gender gender) {
                         setState(() => _currentGender = gender);
@@ -205,6 +208,10 @@ class HomeState extends State<HomeBMI> with TickerProviderStateMixin {
                     title: 'Weight',
                     subtitle: 'Weight selected',
                     message: '${_currentWeight ?? 0} Kg',
+                    padding: EdgeInsets.symmetric(
+                      horizontal: Responsive.getInstance().setWidth(10),
+                      vertical: Responsive.getInstance().setHeight(5),
+                    ),
                     child: WeightCardSection(
                       onChangeWeight: (int weight) {
                         setState(() => _currentWeight = weight);
