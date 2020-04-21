@@ -88,6 +88,7 @@ class _HeightCardSectionState extends State<HeightCardSection> {
                 '${widget.maxHeight - 5 * i}',
                 style: TextStyle(
                   fontSize: _fontSize,
+                  fontWeight: FontWeight.w400,
                   color: Colors.blueGrey,
                 ),
               );

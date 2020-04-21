@@ -108,6 +108,9 @@ class WeightSlider extends StatelessWidget {
                       style: TextStyle(
                         fontSize: Responsive.getInstance()
                             .setSp(itemValue == weightValue ? 28 : 14),
+                        fontWeight: itemValue == weightValue
+                            ? FontWeight.w700
+                            : FontWeight.w400,
                         color: itemValue == weightValue
                             ? Colors.blueGrey
                             : Colors.black,

@@ -114,7 +114,7 @@ class _AgeCardSectionState extends State<AgeCardSection>
                             color: finalValue == _age ? Colors.white : null,
                             fontWeight: finalValue == _age
                                 ? FontWeight.w300
-                                : FontWeight.w600,
+                                : FontWeight.w400,
                           ),
                         ),
                       ),
