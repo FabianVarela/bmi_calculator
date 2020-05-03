@@ -2,6 +2,7 @@ import 'package:bmi_calculator/model/gender.dart';
 import 'package:bmi_calculator/ui/utils/responsive.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class AgeCardSection extends StatefulWidget {
   AgeCardSection({@required this.gender, @required this.onChangeAge});
@@ -66,10 +67,9 @@ class _AgeCardSectionState extends State<AgeCardSection>
             child: Opacity(
               opacity: .1,
               child: Center(
-                child: Image.asset(
+                child: SvgPicture.asset(
                   _currentAssetImage,
                   fit: BoxFit.contain,
-                  width: Responsive.getInstance().setWidth(150),
                   height: MediaQuery.of(context).size.height * 0.22,
                 ),
               ),
@@ -155,11 +155,11 @@ class _AgeCardSectionState extends State<AgeCardSection>
 
         Future<void>.delayed(Duration(milliseconds: 1000), () {
           setState(() => _currentAssetImage =
-              'assets/images/age/$season\_$genderLowerCase.png');
+              'assets/images/age/$season\_$genderLowerCase.svg');
           _animationController.forward();
         });
       } else {
-        _currentAssetImage = 'assets/images/age/$season\_$genderLowerCase.png';
+        _currentAssetImage = 'assets/images/age/$season\_$genderLowerCase.svg';
       }
     } else {
       _currentAssetImage = '';
