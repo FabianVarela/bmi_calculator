@@ -1,8 +1,14 @@
 import 'package:bmi_calculator/ui/home.ui.dart';
 import 'package:bmi_calculator/ui/utils/responsive.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-void main() => runApp(MyApp());
+Future<void> main() async {
+  await SystemChrome.setPreferredOrientations(
+      <DeviceOrientation>[DeviceOrientation.portraitUp]);
+
+  runApp(MyApp());
+}
 
 class MyApp extends StatefulWidget {
   @override
