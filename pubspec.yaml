@@ -12,6 +12,7 @@ dependencies:
 
   cupertino_icons: ^0.1.2
   flutter_svg: ^0.17.4
+  google_fonts: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -26,14 +27,3 @@ flutter:
     - assets/images/gender/
     - assets/images/age/
     - assets/images/height/
-
-  fonts:
-    - family: FiraSans
-      fonts:
-        - asset: assets/fonts/FiraSans-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/FiraSans-Regular.ttf
-        - asset: assets/fonts/FiraSans-Light.ttf
-          weight: 300
-        - asset: assets/fonts/FiraSans-Thin.ttf
-          weight: 100
